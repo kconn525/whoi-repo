@@ -61,6 +61,29 @@ ggplot(data = se) +
 ggplot(data=se, aes(x=year, y=visitors))
 ```
 
+```{r}
+ggplot(data=se)+
+  geom_point(aes(x=year, y=visitors, color=park_name))+
+  facet_wrap(~state, scales="free")+ #scales="free" means eat plot can use different scales
+  theme(axis.text.x=element_text(angle=90))
+```
+```{r}
+ggplot(data=se)+
+  geom_jitter(aes(x=park_name, y=visitors, color=park_name), alpha=0.4, width=0.2)+ #width made the plots skinnier
+  coord_flip() #flipped the x and y axis 
+```
+```{r}
+ggplot(se) +
+  geom_line(aes(x=year, y=visitors, color=park_name))+
+  theme_bw()
+```
+```{r}
+ggplot(acadia, aes(x=year,y=visitors))+ #put aestetics in the ggplot unless you need to define new ones
+  geom_point()+
+  geom_line()+
+  geom_smooth()
+```
+
 
 This markdown file is being created to learn ggplot2
 ```{r setup, include=FALSE}
