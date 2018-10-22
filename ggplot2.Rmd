@@ -7,6 +7,61 @@ output: html_document
 
 #Learning ggplot2 
 
+```{r}
+#install packages
+#install.packages("tidyverse")
+#library(tidyverse)
+
+library(ggplot2)
+library(readr)
+
+#National Parks in California
+ca <- read_csv("https://raw.githubusercontent.com/OHI-Science/data-science-training/master/data/ca.csv") 
+
+#Acadia National Park
+acadia <- read_csv("https://raw.githubusercontent.com/OHI-Science/data-science-training/master/data/acadia.csv")
+
+#Southeast US National Parks
+se <- read_csv("https://raw.githubusercontent.com/OHI-Science/data-science-training/master/data/se.csv")
+
+#2016 Visitation for all Pacific West National Parks
+visit_16 <- read_csv("https://raw.githubusercontent.com/OHI-Science/data-science-training/master/data/visit_16.csv")
+
+#All Nationally designated sites in Massachusetts
+mass <- read_csv("https://raw.githubusercontent.com/OHI-Science/data-science-training/master/data/mass.csv")
+
+
+```
+
+Start with the California ('ca') dataset
+Plot visitation to all CA National Parks over time
+```{r}
+ggplot(data = ca) +
+  geom_point(aes(x=year, y=visitors, color= park_name)) +
+  labs(x="Year",
+       y="Visitation", 
+       title="California National Park Visitation") +
+  theme_bw() + #changes the gray grid background to black and white for nicer viewing
+  theme(legend.title=element_blank()) #erases legend title
+
+
+```
+```{r}
+
+View(se)
+ggplot(data = se) +
+  geom_point(aes(x=year, y=visitors, color= state)) +
+  labs(x="Year",
+       y="Visitation", 
+       title="Southeast National Park Visitation") +
+  theme_minimal() + #changes the gray grid background to black and white for nicer viewing
+  theme(legend.title=element_blank())+ #erases legend title
+  theme(axis.text.x = element_text(angle = 45, size = 14)) #angles the x axis labels to 45 degrees
+
+ggplot(data=se, aes(x=year, y=visitors))
+```
+
+
 This markdown file is being created to learn ggplot2
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
