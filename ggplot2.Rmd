@@ -1,8 +1,13 @@
 ---
-title: "graphicswithggplot2"
+title: "Graphics with ggplot2"
+author: "Katie"
+date: "10/22/2018"
 output: html_document
 ---
 
+#Learning ggplot2 
+
+This markdown file is being created to learn ggplot2
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
