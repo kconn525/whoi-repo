@@ -70,9 +70,13 @@ gapminder %>%
 gapVE <- gapminder %>% 
   filter(country =="Vietnam" | country=="Egypt") %>%
   mutate(maxGDPpercap=max(gdpPercap))
-  
+#or
+gapminder %>% 
+  filter(country %in% c("Egypt","Vietnam")) %>% 
+  mutate (gdp = pop*gdpPercap, #use a comma in a mutate function to have it complete 2 functions
+          max_gdp = max(gdp))
 
 
-```
+  ```
 
 
