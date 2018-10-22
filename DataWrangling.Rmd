@@ -1,0 +1,35 @@
+---
+title: "DataWrangling"
+output: html_document
+---
+
+```{r}
+install.packages("tidyverse") #install.packages("tidyverse") couldn't install bc of lubridate
+library(dplyr)
+library(tidyr)
+## read gapminder csv. Note the readr:: prefix identifies which package it's in
+gapminder <- readr::read_csv('https://raw.githubusercontent.com/OHI-Science/data-science-training/master/data/gapminder.csv')
+
+#inspect the data
+#look at data
+gapminder
+head(gapminder) #gives first 6 by default
+tail(gapminder)
+str(gapminder) #type of data
+summary(gapminder) #min max and mean by column
+install.packages("skimr")
+library(skimr)
+skimr::skim(gapminder)
+names(gapminder)
+dim(gapminder) #dimensions (rows, columns)
+ncol(gapminder)
+c(nrow(gapminder),ncol(gapminder))
+
+##dplyr
+
+
+
+```
+
+
+
