@@ -78,10 +78,14 @@ ggplot(se) +
   theme_bw()
 ```
 ```{r}
-ggplot(acadia, aes(x=year,y=visitors))+ #put aestetics in the ggplot unless you need to define new ones
+myplot <- ggplot(acadia, aes(x=year,y=visitors))+ #put aestetics in the ggplot unless you need to define new ones
   geom_point()+
   geom_line()+
   geom_smooth()
+
+ggsave("myplot.png",myplot)
+ myplot
+
 ```
 
 
