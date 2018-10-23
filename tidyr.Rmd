@@ -1,0 +1,76 @@
+---
+title: "tidyr"
+output: html_document
+---
+```{r}
+## read in gapminder data in wide format
+gap_wide <- readr::read_csv('https://raw.githubusercontent.com/OHI-Science/data-science-training/master/data/gapminder_wide.csv')
+```
+
+tidyr::gather()
+```{r}
+#gather uses key and value. these name new columns
+gap_long <- gap_wide %>% 
+  gather(key= obstype_year, value=obs_values, -continent, -country) #the -continent and -country means that you DONT gather them because you want to keep them as their own variables...they were ok. key=previous column headings, values=the row inputs
+
+```
+
+tidyr::separte()
+```{r}
+gap_long <- gap_wide %>% 
+  gather(key= obstype_year, value=obs_values, -continent, -country) %>% 
+  separate(col=obstype_year, into=c("obs_type","year"), sep="_", convert=TRUE) #check how R classed the new data columns, i.e. is year a num is obs_type a charcter? 
+
+```
+
+plot long data
+```{r}
+canada_df <- gap_long %>% 
+  filter(country=="Canada", obs_type=="lifeExp") 
+
+ggplot(data = canada_df, aes(x=year, y=obs_values))+
+  geom_line()
+
+life_df <- gap_long %>% 
+  filter(obs_type =="lifeExp",
+         continent=="Americas")
+
+ggplot(data=life_df, aes(x=year, y=obs_values, color = country))+
+  geom_line()
+
+mean_life<-gap_long %>% 
+  filter(obs_type=="lifeExp", year>1981) %>% 
+  group_by(continent, year) %>% 
+  summarize(mean_lifeExp=mean(obs_values))
+
+ggplot(data = mean_life, aes(x=year, y=mean_lifeExp, color=continent))+
+  geom_line()+
+  labs(x="year",y="Mean Life Expectancy", tile="Life Expectancy Over Time")+
+  theme_minimal()
+```
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
