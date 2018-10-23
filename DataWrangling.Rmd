@@ -76,7 +76,11 @@ gapminder %>%
   mutate (gdp = pop*gdpPercap, #use a comma in a mutate function to have it complete 2 functions
           max_gdp = max(gdp))
 
+gap_summarize <- gapminder %>% 
+  group_by(country) %>% 
+  mutate(gdp=pop*gdpPercap) %>% 
+  summarize(max_gdp=max(gdp)) %>% 
+  ungroup() %>% 
+  arrange(desc(max_gdp))
 
   ```
-
-
